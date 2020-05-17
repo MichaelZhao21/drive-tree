@@ -1,0 +1,7 @@
+{
+  "timeZone": "America/Indiana/Knox",
+  "dependencies": {
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8"
+}
