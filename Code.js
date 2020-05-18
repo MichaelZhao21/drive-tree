@@ -1,10 +1,15 @@
 function doGet() {
-	file = HtmlService.createTemplateFromFile('Index').evaluate();
-	return file;
+	var index = HtmlService.createTemplateFromFile('Index').evaluate();
+	index.setTitle("Drive Tree");
+	return index;
 }
 
 function include(filename) {
 	return HtmlService.createHtmlOutputFromFile(filename).getContent();
+}
+
+function getSize() {
+	return DriveApp.getStorageUsed();
 }
 
 function getTree() {

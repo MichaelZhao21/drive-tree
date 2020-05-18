@@ -7,9 +7,10 @@
     <title>Drive Tree</title>
     <?!= include('Stylesheet'); ?>
 </head>
-<body>
+<body onload="getSize()">
     <h1>Drive Tree</h1>
-    <div class="info">Run the tree command on your own Google Drive!</div>
+    <div class="info">Run the tree command on your own Google Drive! (This takes a bit especially if your drive has a lot of nested files)</div>
+    <div class="size"></div>
     <button class="run" onclick="runTree()">Run</button>
     <div class="tree"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" charset="utf-8"></script>
