@@ -2,6 +2,10 @@
   "timeZone": "America/Indiana/Knox",
   "dependencies": {
   },
+  "webapp": {
+    "access": "ANYONE",
+    "executeAs": "USER_ACCESSING"
+  },
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8"
 }
