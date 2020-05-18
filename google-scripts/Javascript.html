@@ -5,15 +5,38 @@
         }
     });
 
-    function runTree() {google.script.run.withSuccessHandler(showTree).getTree();}
-
-    function showTree(tree) {
-        console.log(tree);
+    function runTree() {
+        google.script.run.withSuccessHandler(treeAsync).createOutput();
     }
 
-    function getSize() {google.script.run.withSuccessHandler(showSize).getSize();}
+    function butt() {
+        if ($(".run").html() == "<b>Progress</b>")
+            showProgress();
+        else
+            runTree();
+    }
+
+    function treeAsync(file) {
+        $(".run").html("<b>Progress</b>");
+        $(".frame").prop('src', file.url);
+        google.script.run.withSuccessHandler(done).getTree(file.name);
+    }
+
+    function done() {
+        $(".run").prop('disabled', true);
+        $(".run").html("<b>Done!</b>");
+        showProgress();
+    }
+
+    function load() {
+        google.script.run.withSuccessHandler(showSize).getSize();
+    }
 
     function showSize(size) {
-        $(".size").html("<b>Google Drive Size</b>: " + size + " bytes!");
+        $(".size").html("<b>Your Google Drive Size</b>: " + size + " bytes!");
+    }
+
+    function showProgress() {
+        $('.frame').attr('src', function (i, val) { return val; });
     }
 </script>

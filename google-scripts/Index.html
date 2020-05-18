@@ -7,16 +7,17 @@
     <title>Drive Tree</title>
     <?!= include('Stylesheet'); ?>
 </head>
-<body onload="getSize()">
+<body onload="load()">
     <div class=box>
         <h1>Drive Tree</h1>
         <div class="obj text info">Run the tree command on your own Google Drive! (This takes a bit especially if your drive has a lot of nested files)</div>
-        <div class="obj text size"><b>Google Drive Size:</b> Calculating...</div>
+        <div class="obj text info">Because iframes are &gt:(( you have to manually reload to check the progress of the tree</div>
+        <div class="obj text info">The text file will be saved to the root of your drive.</div>
+        <div class="obj text size"><b>Your Google Drive Size:</b> Calculating...</div>
         <div class="obj butt">
-            <button class="obj run" onclick="runTree()"><b>&ltRun&gt</b></button>
+            <button class="obj run" onclick="butt()"><b>&ltRun&gt</b></button>
         </div>
-        <div class="obj tree"></div>
-        <iframe class="obj frame" src="https://drive.google.com/file/d/0B3e8jYNa7ELnWlZ2b2RmY1NvaTQ/preview"></iframe>
+        <iframe id="magic" class="obj frame" src=""></iframe>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" charset="utf-8"></script>
     <?!= include('Javascript'); ?>
