@@ -14,7 +14,7 @@ function getSize() {
 
 function getTree() {
 	var root = DriveApp.getRootFolder().getFoldersByName("A SAFE PLACE FOR YOUR FILES").next(); // TODO: change to root lol
-	var rootNode = new FolderNode(root);
+	var rootNode = new FolderNode(root, 0);
 	var toProcess = [rootNode];
 	while (toProcess.length) {
 		var next = toProcess.shift();
@@ -29,15 +29,19 @@ function genFiles(node) {
 	var folderIt = node.folder.getFolders();
 	var fileIt = node.folder.getFiles();
 	while (folderIt.hasNext()) {
-		node.subfolders.push(new FolderNode(folderIt.next()));				
+		node.subfolders.push(new FolderNode(folderIt.next(), node.depth + 1));				
 	}
 	while (fileIt.hasNext()) {
-		node.files.push(fileIt.next().getName());
+		var tempNext = fileIt.next();
+		var name = tempNext.getName();
+		if (tempNext.getMimeType() == "application/vnd.google-apps.shortcut")
+			name += " [Shortcut]";
+		node.files.push(name);
 	}
 }
 
-function FolderNode(folder) {
+function FolderNode(folder, depth) {
 	var subfolders = [];
 	var files = [];
-	return {folder, folderName: folder.getName(), subfolders, files};
+	return {folder, folderName: folder.getName(), subfolders, files, depth};
 }
