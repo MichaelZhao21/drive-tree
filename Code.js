@@ -8,17 +8,16 @@ function include(filename) {
 }
 
 function getTree() {
-	var root = DriveApp.getRootFolder().getFoldersByName("Robotics").next();
+	var root = DriveApp.getRootFolder().getFoldersByName("A SAFE PLACE FOR YOUR FILES").next(); // TODO: change to root lol
 	var rootNode = new FolderNode(root);
 	var toProcess = [rootNode];
 	while (toProcess.length) {
 		var next = toProcess.shift();
 		genFiles(next);
 		toProcess = toProcess.concat(next.subfolders);
-		Logger.log(next.folder);
-		Logger.log(toProcess);
 	}
-	Logger.log(rootNode.subfolders[0].subfolders);
+	Logger.log(rootNode);
+	return rootNode;
 }
 
 function genFiles(node) {
@@ -28,14 +27,12 @@ function genFiles(node) {
 		node.subfolders.push(new FolderNode(folderIt.next()));				
 	}
 	while (fileIt.hasNext()) {
-		node.files.push(fileIt.next());
+		node.files.push(fileIt.next().getName());
 	}
 }
 
-class FolderNode {
-	constructor(folder) {
-		this.folder = folder;
-		this.subfolders = [];
-		this.files = [];
-	}
+function FolderNode(folder) {
+	var subfolders = [];
+	var files = [];
+	return {folder, folderName: folder.getName(), subfolders, files};
 }
